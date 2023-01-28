@@ -3,6 +3,7 @@ package com.board.projectboard.controller;
 import com.board.projectboard.ArticleDto;
 import com.board.projectboard.Service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,12 +18,12 @@ public class ArticleController {
     private ArticleService articleService;
 
     @GetMapping("/list")
-    public ResponseEntity<ArticleDto> getArticleList(
+    public ResponseEntity<List> getArticleList(
             @RequestParam int cursor
     ){
         List<ArticleDto> articleDtoList = articleService.getArticles(cursor);
 
-        return new ResponseEntity<>();
+        return new ResponseEntity<>(articleDtoList, HttpStatus.OK);
     }
 
 }
